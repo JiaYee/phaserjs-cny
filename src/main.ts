@@ -23,8 +23,6 @@ const gameConfig = {
 };
 
 const game = new Phaser.Game(gameConfig);
-packetCount = 0;
-maxPacketCount = 20;
 
 function preloadScene() {
   this.load.image("packet", "/src/packet.png");
