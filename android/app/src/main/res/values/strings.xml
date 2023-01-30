@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PhaserCNY</string>
+    <string name="title_activity_main">PhaserCNY</string>
+    <string name="package_name">com.hadestech.phasercny</string>
+    <string name="custom_url_scheme">com.hadestech.phasercny</string>
+</resources>
