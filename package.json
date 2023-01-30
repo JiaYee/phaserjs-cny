@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync:android": "npx cap sync android",
+    "open:android": "npx cap open android"
   },
   "devDependencies": {
     "@capacitor/cli": "^4.6.2",
