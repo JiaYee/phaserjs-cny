@@ -73,8 +73,10 @@
           loop: true,
         });
 
-        this.physics.add.collider(this.packets, this.packets);
-
+        this.physics.add.collider(this.packets, this.packets, (p1, p2) => {
+          p1.body.angularVelocity = Phaser.Math.Between(-200, 200);
+          p2.body.angularVelocity = Phaser.Math.Between(-200, 200);
+        });
         // handle user tapping on the packets
         this.input.on(
           "pointerdown",
@@ -104,6 +106,7 @@
         // add the packet to the group and set its velocity
         const packet = this.packets.create(x, y, "packet");
         packet.setDisplaySize(packet.width * 0.3, packet.height * 0.3);
+        packet.setCircle(packet.width * 0.5);
         packet.setVelocityX(fromLeft ? 200 : -200);
 
         // set bounce against top, left, right, bottom boundary
