@@ -37,6 +37,7 @@
 
       new Phaser.Game(gameConfig);
       let gameOver = false;
+      let level = 1;
 
       function preloadScene() {
         this.load.image("packet", "packet.png");
@@ -84,13 +85,17 @@
           callbackScope: this,
           loop: true,
         });
-        setInterval(() => {
+        let intervalEv = setInterval(() => {
           this.time.addEvent({
             delay: 1000,
             callback: spawnPacket,
             callbackScope: this,
             loop: true,
           });
+          level += 1;
+          if (level >= 5) {
+            clearInterval(intervalEv);
+          }
         }, 5000);
 
         this.physics.add.collider(this.packets, this.packets, (p1, p2) => {
@@ -118,7 +123,7 @@
 
       function spawnPacket() {
         if (!gameOver) {
-          if (this.packets.getChildren().length >= 10) {
+          if (this.packets.getChildren().length >= 100) {
             gameOver = true;
             this.physics.pause();
             this.packets.clear(true, true);
