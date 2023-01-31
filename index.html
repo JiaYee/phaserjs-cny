@@ -69,7 +69,7 @@
 
         // spawn a sprite at random intervals
         this.time.addEvent({
-          delay: 1000, // in milliseconds
+          delay: Phaser.Math.Between(500, 1000), // in milliseconds
           callback: spawnPacket,
           callbackScope: this,
           loop: true,
@@ -93,9 +93,6 @@
                 packet.destroy();
               }
             }, this);
-            if (gameOver) {
-              location.reload();
-            }
           },
           this
         );
@@ -131,24 +128,28 @@
               }
             );
             gameOverText.setOrigin(0.5, 0.5);
-
+            gameOverText.setInteractive({ useHandCursor: true });
+            gameOverText.on("pointerup", function () {
+              location.reload();
+            });
             return;
+          } else {
+            this.sound.play("spawn");
+
+            // spawn sprite from left or right of the screen at random height
+            const fromLeft = Phaser.Math.Between(0, 1) === 0;
+            const x = fromLeft ? 0 : gameConfig.width;
+            const y = Phaser.Math.Between(0, gameConfig.height);
+
+            // add the packet to the group and set its velocity
+            const packet = this.packets.create(x, y, "packet");
+            packet.setDisplaySize(packet.width * 0.3, packet.height * 0.3);
+            packet.setCircle(packet.width * 0.5);
+            packet.setVelocityX(fromLeft ? 200 : -200);
+
+            // set bounce against top, left, right, bottom boundary
+            packet.setBounce(1);
           }
-          this.sound.play("spawn");
-
-          // spawn sprite from left or right of the screen at random height
-          const fromLeft = Phaser.Math.Between(0, 1) === 0;
-          const x = fromLeft ? 0 : gameConfig.width;
-          const y = Phaser.Math.Between(0, gameConfig.height);
-
-          // add the packet to the group and set its velocity
-          const packet = this.packets.create(x, y, "packet");
-          packet.setDisplaySize(packet.width * 0.3, packet.height * 0.3);
-          packet.setCircle(packet.width * 0.5);
-          packet.setVelocityX(fromLeft ? 200 : -200);
-
-          // set bounce against top, left, right, bottom boundary
-          packet.setBounce(1);
         }
       }
 
