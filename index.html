@@ -51,8 +51,8 @@
 
         // create score text object with default value of 0
         this.score = 0;
-        this.scoreText = this.add.text(16, 16, "Score: 0", {
-          fontSize: "32px",
+        this.scoreText = this.add.text(16, 16, "$0", {
+          fontSize: "64px",
           fill: "#ffffff",
         });
 
@@ -79,6 +79,7 @@
           p1.body.angularVelocity = Phaser.Math.Between(-200, 200);
           p2.body.angularVelocity = Phaser.Math.Between(-200, 200);
         });
+
         // handle user tapping on the packets
         this.input.on(
           "pointerdown",
@@ -88,10 +89,13 @@
                 this.sound.play("bounce");
                 packet.setVelocityY(Phaser.Math.Between(-200, -500));
                 this.score += 1;
-                this.scoreText.setText("Score: " + this.score);
+                this.scoreText.setText("$" + this.score);
                 packet.destroy();
               }
             }, this);
+            if (gameOver) {
+              location.reload();
+            }
           },
           this
         );
@@ -107,7 +111,7 @@
             let scoreText = this.add.text(
               this.cameras.main.centerX,
               this.cameras.main.centerY - 50,
-              `Score: ${this.score}`,
+              `Gong Xi Fa Cai: $${this.score}`,
               {
                 fontSize: "64px",
                 fontWeight: "bold",
@@ -127,10 +131,6 @@
               }
             );
             gameOverText.setOrigin(0.5, 0.5);
-            gameOverText.setInteractive({ useHandCursor: true });
-            gameOverText.on("pointerup", function () {
-              location.reload();
-            });
 
             return;
           }
@@ -154,7 +154,7 @@
 
       function updateScene() {
         // update score text object with current score value
-        this.scoreText.setText(`Score: ${this.score}`);
+        this.scoreText.setText(`$${this.score}`);
       }
     </script>
   </body>
