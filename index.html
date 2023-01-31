@@ -36,6 +36,7 @@
       };
 
       new Phaser.Game(gameConfig);
+      let gameOver = false;
 
       function preloadScene() {
         this.load.image("packet", "packet.png");
@@ -97,22 +98,58 @@
       }
 
       function spawnPacket() {
-        if (this.packets.getChildren().length >= 10) return;
-        this.sound.play("spawn");
+        if (!gameOver) {
+          if (this.packets.getChildren().length >= 10) {
+            gameOver = true;
+            this.physics.pause();
+            this.packets.clear(true, true);
 
-        // spawn sprite from left or right of the screen at random height
-        const fromLeft = Phaser.Math.Between(0, 1) === 0;
-        const x = fromLeft ? 0 : gameConfig.width;
-        const y = Phaser.Math.Between(0, gameConfig.height);
+            let scoreText = this.add.text(
+              this.cameras.main.centerX,
+              this.cameras.main.centerY - 50,
+              `Score: ${this.score}`,
+              {
+                fontSize: "64px",
+                fontWeight: "bold",
+                align: "center",
+              }
+            );
+            scoreText.setOrigin(0.5, 0.5);
 
-        // add the packet to the group and set its velocity
-        const packet = this.packets.create(x, y, "packet");
-        packet.setDisplaySize(packet.width * 0.3, packet.height * 0.3);
-        packet.setCircle(packet.width * 0.5);
-        packet.setVelocityX(fromLeft ? 200 : -200);
+            let gameOverText = this.add.text(
+              this.cameras.main.centerX,
+              this.cameras.main.centerY + 50,
+              "Tap to Restart",
+              {
+                fontSize: "64px",
+                fontWeight: "bold",
+                align: "center",
+              }
+            );
+            gameOverText.setOrigin(0.5, 0.5);
+            gameOverText.setInteractive({ useHandCursor: true });
+            gameOverText.on("pointerup", function () {
+              location.reload();
+            });
 
-        // set bounce against top, left, right, bottom boundary
-        packet.setBounce(1);
+            return;
+          }
+          this.sound.play("spawn");
+
+          // spawn sprite from left or right of the screen at random height
+          const fromLeft = Phaser.Math.Between(0, 1) === 0;
+          const x = fromLeft ? 0 : gameConfig.width;
+          const y = Phaser.Math.Between(0, gameConfig.height);
+
+          // add the packet to the group and set its velocity
+          const packet = this.packets.create(x, y, "packet");
+          packet.setDisplaySize(packet.width * 0.3, packet.height * 0.3);
+          packet.setCircle(packet.width * 0.5);
+          packet.setVelocityX(fromLeft ? 200 : -200);
+
+          // set bounce against top, left, right, bottom boundary
+          packet.setBounce(1);
+        }
       }
 
       function updateScene() {
