@@ -40,6 +40,7 @@
       function preloadScene() {
         this.load.image("packet", "packet.png");
         this.load.audio("bounce", "bounce.mp3");
+        this.load.audio("spawn", "spawn.mp3");
         // this.load.audio("bgm", "bgm.mp3");
       }
 
@@ -97,6 +98,7 @@
 
       function spawnPacket() {
         if (this.packets.getChildren().length >= 10) return;
+        this.sound.play("spawn");
 
         // spawn sprite from left or right of the screen at random height
         const fromLeft = Phaser.Math.Between(0, 1) === 0;
