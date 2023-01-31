@@ -76,7 +76,12 @@
         });
 
         // set bounds for world
-        this.physics.world.setBounds(0, 0, gameConfig.width, gameConfig.height);
+        this.physics.world.setBounds(
+          0,
+          0,
+          gameConfig.width,
+          gameConfig.height - 70
+        );
 
         // Progressively adds the number of packets spawned
         this.time.addEvent({
@@ -164,12 +169,11 @@
             });
             return;
           } else {
-            this.sound.play("spawn");
-
             // spawn sprite from left or right of the screen at random height
+            this.sound.play("spawn");
             const fromLeft = Phaser.Math.Between(0, 1) === 0;
             const x = fromLeft ? 0 : gameConfig.width;
-            const y = Phaser.Math.Between(0, gameConfig.height);
+            const y = Phaser.Math.Between(0, gameConfig.height - 140);
 
             // add the packet to the group and set its velocity
             const packet = this.packets.create(x, y, "packet");
