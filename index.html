@@ -56,6 +56,22 @@
           fill: "#ffffff",
         });
 
+        // Add a text "created by jiayee"
+        let link = "https://www.linkedin.com/in/jiayeetai/";
+        this.createdBy = this.add
+          .text(
+            this.game.config.width / 2,
+            this.game.config.height - 30,
+            "created with <3 by jiayee",
+            { fontSize: "32px", fill: "#fff", align: "center" }
+          )
+          .setOrigin(0.5, 0.5);
+
+        // Make text clickable
+        this.createdBy.setInteractive();
+        this.createdBy.on("pointerup", () => {
+          window.open(link, "_blank");
+        });
         // enable physics for packets
         this.packets = this.physics.add.group({
           defaultKey: "packet",
