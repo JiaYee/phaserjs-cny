@@ -67,13 +67,21 @@
         // set bounds for world
         this.physics.world.setBounds(0, 0, gameConfig.width, gameConfig.height);
 
-        // spawn a sprite at random intervals
+        // Progressively adds the number of packets spawned
         this.time.addEvent({
-          delay: Phaser.Math.Between(500, 1000), // in milliseconds
+          delay: 1000,
           callback: spawnPacket,
           callbackScope: this,
           loop: true,
         });
+        setInterval(() => {
+          this.time.addEvent({
+            delay: 1000,
+            callback: spawnPacket,
+            callbackScope: this,
+            loop: true,
+          });
+        }, 5000);
 
         this.physics.add.collider(this.packets, this.packets, (p1, p2) => {
           p1.body.angularVelocity = Phaser.Math.Between(-200, 200);
