@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "sync:android": "npx cap sync android",
-    "open:android": "npx cap open android"
+    "open:android": "npx cap open android",
+    "deploy": "firebase deploy --only hosting"
   },
   "devDependencies": {
     "@capacitor/cli": "^4.6.2",
