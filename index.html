@@ -2,6 +2,10 @@
 <html>
   <head>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.50.0/dist/phaser.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <style>
@@ -10,6 +14,7 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
+        font-family: "Bubblegum Sans", cursive;
       }
     </style>
     <script>
@@ -55,6 +60,7 @@
         this.scoreText = this.add.text(16, 16, "$0", {
           fontSize: "64px",
           fill: "#ffffff",
+          fontFamily: "'Bubblegum Sans', cursive",
         });
 
         // Add a text "created by jiayee"
@@ -63,7 +69,12 @@
             this.game.config.width / 2,
             this.game.config.height - 30,
             "v1.0.4 by abetaiii",
-            { fontSize: "32px", fill: "#fff", align: "center" }
+            {
+              fontSize: "32px",
+              fill: "#fff",
+              align: "center",
+              fontFamily: "'Bubblegum Sans', cursive",
+            }
           )
           .setOrigin(0.5, 0.5);
 
@@ -141,6 +152,7 @@
                 fontSize: "64px",
                 fontWeight: "bold",
                 align: "center",
+                fontFamily: "'Bubblegum Sans', cursive",
               }
             );
             scoreText.setOrigin(0.5, 0.5);
@@ -153,6 +165,7 @@
                 fontSize: "64px",
                 fontWeight: "bold",
                 align: "center",
+                fontFamily: "'Bubblegum Sans', cursive",
               }
             );
             gameOverText.setOrigin(0.5, 0.5);
