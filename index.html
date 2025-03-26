@@ -101,7 +101,7 @@
           if (level >= 8) {
             clearInterval(intervalEv);
           }
-        }, 5000);
+        }, 3000);
 
         this.physics.add.collider(this.packets, this.packets, (p1, p2) => {
           p1.body.angularVelocity = Phaser.Math.Between(-200, 200);
