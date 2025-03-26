@@ -117,7 +117,7 @@
                 this.sound.play("bounce");
                 packet.setVelocityY(Phaser.Math.Between(-200, -500));
                 this.score += 0.1;
-                this.scoreText.setText("$" + this.score);
+                this.scoreText.setText("$" + this.score.toFixed(2));
                 packet.destroy();
               }
             }, this);
@@ -136,7 +136,7 @@
             let scoreText = this.add.text(
               this.cameras.main.centerX,
               this.cameras.main.centerY - 50,
-              `Selamat Hari Raya: $${this.score}`,
+              `Selamat Hari Raya: $${this.score.toFixed(2)}`,
               {
                 fontSize: "64px",
                 fontWeight: "bold",
@@ -188,8 +188,8 @@
       }
 
       function updateScene() {
-        // update score text object with current score value
-        this.scoreText.setText(`$${this.score}`);
+        // update score text object with current score value showing 2 decimal places
+        this.scoreText.setText(`$${this.score.toFixed(2)}`);
       }
     </script>
   </body>
