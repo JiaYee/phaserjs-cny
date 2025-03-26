@@ -116,7 +116,7 @@
               if (packet.getBounds().contains(pointer.x, pointer.y)) {
                 this.sound.play("bounce");
                 packet.setVelocityY(Phaser.Math.Between(-200, -500));
-                this.score += 1;
+                this.score += 0.1;
                 this.scoreText.setText("$" + this.score);
                 packet.destroy();
               }
