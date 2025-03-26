@@ -40,7 +40,7 @@
       let level = 1;
 
       function preloadScene() {
-        this.load.image("packet", "packet.png");
+        this.load.image("packet", "packet.svg");
         this.load.audio("bounce", "bounce.mp3");
         this.load.audio("spawn", "spawn.mp3");
         // this.load.audio("bgm", "bgm.mp3");
@@ -177,8 +177,8 @@
 
             // add the packet to the group and set its velocity
             const packet = this.packets.create(x, y, "packet");
-            packet.setDisplaySize(packet.width * 0.3, packet.height * 0.3);
-            packet.setCircle(packet.width * 0.5);
+            packet.setDisplaySize(packet.width * 0.25, packet.height * 0.25);
+            packet.setCircle(packet.width * 0.45);
             packet.setVelocityX(fromLeft ? 200 : -200);
 
             // set bounce against top, left, right, bottom boundary
