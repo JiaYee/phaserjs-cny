@@ -144,6 +144,28 @@
             this.physics.pause();
             this.packets.clear(true, true);
 
+            // Create a money shower effect
+            const particles = this.add.particles("packet");
+            const emitter = particles.createEmitter({
+              x: { min: 0, max: this.game.config.width },
+              y: -100,
+              lifespan: 4000,
+              speedY: { min: 200, max: 400 },
+              speedX: { min: -100, max: 100 },
+              scale: { start: 0.2, end: 0.1 },
+              quantity: 3,
+              frequency: 100,
+              rotate: { min: -180, max: 180 },
+              gravityY: 300,
+              angle: { min: 0, max: 360 },
+              angularVelocity: { min: -100, max: 100 },
+            });
+
+            // Run the emitter for 3 seconds
+            this.time.delayedCall(3000, () => {
+              emitter.stop();
+            });
+
             let scoreText = this.add.text(
               this.cameras.main.centerX,
               this.cameras.main.centerY - 50,
